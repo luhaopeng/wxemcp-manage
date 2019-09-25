@@ -41,7 +41,8 @@ class Request {
 
 const Test = {
   Decrypt: new Request('/test/decrypt'),
-  Encrypt: new Request('/test/encrypt')
+  Encrypt: new Request('/test/encrypt'),
+  PayReg: new Request('/test/registerEnt')
 }
 
 export { Test }
