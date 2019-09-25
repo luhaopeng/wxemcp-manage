@@ -1,11 +1,13 @@
-import { Button, Card, Col, Input, Layout, Row } from 'antd'
+import { Button, Card, Col, Input, Layout, Row, Select } from 'antd'
 import React, { useState } from 'react'
 import { Test } from '../../../api'
 import './index.less'
 
 const { TextArea } = Input
+const { Option } = Select
 
 const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
+  const [cryptoType, setCryptoType] = useState('wxemcp')
   const [toEncrypt, setToEncrypt] = useState('')
   const [encrypted, setEncrypted] = useState('')
   const [encrypting, setEncrypting] = useState(false)
@@ -13,6 +15,7 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
   const [decrypted, setDecrypted] = useState('')
   const [decrypting, setDecrypting] = useState(false)
 
+  const hCryptoType = (v: string) => setCryptoType(v)
   const hInputEnc = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setToEncrypt(e.target.value)
   const hInputDec = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -21,7 +24,10 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
   const hEncrypt = async () => {
     try {
       setEncrypting(true)
-      const { data } = await Test.Encrypt.query({ str: toEncrypt })
+      const { data } = await Test.Encrypt.query({
+        str: toEncrypt,
+        type: cryptoType
+      })
       setEncrypting(false)
       setEncrypted(data.data)
     } catch (err) {
@@ -32,7 +38,10 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
   const hDecrypt = async () => {
     try {
       setDecrypting(true)
-      const { data } = await Test.Decrypt.query({ str: toDecrypt })
+      const { data } = await Test.Decrypt.query({
+        str: toDecrypt,
+        type: cryptoType
+      })
       setDecrypting(false)
       setDecrypted(data.data)
     } catch (err) {
@@ -43,6 +52,10 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
 
   return (
     <Layout.Content className='page-crypto'>
+      <Select className='crypto-type' value={cryptoType} onChange={hCryptoType}>
+        <Option value='wxemcp'>公众号 - 支付信息</Option>
+        <Option value='emc'>Web - 用户密码/jdbc密码</Option>
+      </Select>
       <Row gutter={16}>
         <Col span={12}>
           <Card title='加密' bordered={false}>
