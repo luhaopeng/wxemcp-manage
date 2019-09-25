@@ -4,7 +4,7 @@ import PageHolder from '../../components/page-holder'
 import PageNotFound from '../not-found'
 
 const PageUmb: React.FunctionComponent = (): JSX.Element => (
-  <Suspense fallback={PageHolder}>
+  <Suspense fallback={<PageHolder />}>
     <Switch>
       <Route component={PageNotFound} />
     </Switch>

@@ -6,7 +6,7 @@ import PageNotFound from '../not-found'
 const CompCrypto = lazy(() => import('./crypto'))
 
 const PageOther: React.FunctionComponent = (): JSX.Element => (
-  <Suspense fallback={PageHolder}>
+  <Suspense fallback={<PageHolder />}>
     <Switch>
       <Route path='/other/crypto' component={CompCrypto} />
       <Route component={PageNotFound} />
