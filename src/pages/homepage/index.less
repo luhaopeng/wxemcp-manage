@@ -1,11 +1,10 @@
 @import '../../components/style.less';
 
 .page-home {
-  &:extend(.page-wrapper);
+  .page-wrapper();
 
   .welcome {
-    padding: 24px;
-    background-color: #fff;
+    .main-body();
     min-height: 360px;
   }
 }

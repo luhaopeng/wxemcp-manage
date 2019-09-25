@@ -1,11 +1,10 @@
 @import '../style.less';
 
 .page-holder {
-  &:extend(.page-wrapper);
+  .page-wrapper();
 
   .page-holder-div {
+    .main-body();
     margin-top: 16px;
-    padding: 24px;
-    background-color: #fff;
   }
 }
