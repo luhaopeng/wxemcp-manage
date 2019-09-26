@@ -13,7 +13,7 @@ interface IFormData {
   tmplRecharge: string
 }
 
-const PayRegForm = (props: FormComponentProps) => {
+const WxMsgForm = (props: FormComponentProps) => {
   const [submitting, setSubmitting] = useState(false)
   const {
     getFieldDecorator,
@@ -109,4 +109,4 @@ const PayRegForm = (props: FormComponentProps) => {
   )
 }
 
-export default PayRegForm
+export default WxMsgForm
