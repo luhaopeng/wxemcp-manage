@@ -46,4 +46,8 @@ const Test = {
   WxMsg: new Request('/test/msgConfig')
 }
 
-export { Test }
+const Umb = {
+  Register: new Request('/umb/registerEnt')
+}
+
+export { Test, Umb }
