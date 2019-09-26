@@ -54,8 +54,8 @@ class App extends React.Component<{}, IAppState> {
     ]
 
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Layout.Sider width={240}>
+      <Layout style={{ minHeight: '100vh', paddingLeft: '240px' }}>
+        <Layout.Sider width={240} className='fixed-sider'>
           <div className='logo'>
             <Link to='/'>
               <Icon className='icon' type='fire' />

@@ -73,7 +73,6 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
               onClick={hEncrypt}
             />
             <TextArea
-              className='result-box'
               rows={4}
               value={encrypted}
               placeholder='密文'
@@ -97,7 +96,6 @@ const OtherCrypto: React.FunctionComponent = (): JSX.Element => {
               onClick={hDecrypt}
             />
             <TextArea
-              className='result-box'
               rows={4}
               value={decrypted}
               placeholder='原文'

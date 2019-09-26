@@ -2,6 +2,17 @@
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 }
 
+.fixed-sider {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .logo {
   overflow: hidden;
   line-height: 64px;
