@@ -2,6 +2,7 @@ const merge = require('webpack-merge')
 const base = require('./base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = merge(base, {
   mode: 'production',
@@ -30,5 +31,5 @@ module.exports = merge(base, {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin()]
+  plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()]
 })
