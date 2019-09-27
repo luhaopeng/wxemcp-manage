@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PageHolder from '../../components/page-holder'
 import PageNotFound from '../not-found'
+import './index.less'
 
 const CompRegister = lazy(() => import('./register'))
 const CompBind = lazy(() => import('./bind'))

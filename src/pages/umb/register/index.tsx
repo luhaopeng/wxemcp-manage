@@ -6,8 +6,8 @@ import RegForm from './reg_form'
 const UmbRegister: React.FunctionComponent = (): JSX.Element => {
   const WrappedRegForm = Form.create({})(RegForm)
   return (
-    <Layout.Content className='page-umb-reg'>
-      <Card className='reg-body' title='商户注册' bordered={false}>
+    <Layout.Content className='page-umb'>
+      <Card className='umb-reg-body' title='商户注册' bordered={false}>
         <WrappedRegForm />
       </Card>
     </Layout.Content>

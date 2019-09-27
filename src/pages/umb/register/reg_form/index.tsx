@@ -17,12 +17,7 @@ interface IFormPropsWithRouter
 const UmbRegForm = (props: IFormPropsWithRouter) => {
   const [submitting, setSubmitting] = useState(false)
   const [cType, setCType] = useState('' as CustomerType)
-  const {
-    getFieldDecorator,
-    validateFieldsAndScroll,
-    resetFields,
-    setFields
-  } = props.form
+  const { getFieldDecorator, validateFieldsAndScroll, setFields } = props.form
 
   const submitForm = async (params: object) => {
     try {
@@ -38,7 +33,6 @@ const UmbRegForm = (props: IFormPropsWithRouter) => {
           duration: null,
           message: '注册成功'
         })
-        resetFields()
       } else {
         // err
         const reason: null | string = data.data

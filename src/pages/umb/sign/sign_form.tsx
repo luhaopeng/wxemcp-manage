@@ -5,12 +5,7 @@ import { Umb } from '../../../api'
 
 const UmbValForm = (props: FormComponentProps) => {
   const [submitting, setSubmitting] = useState(false)
-  const {
-    getFieldDecorator,
-    validateFieldsAndScroll,
-    resetFields,
-    setFields
-  } = props.form
+  const { getFieldDecorator, validateFieldsAndScroll } = props.form
 
   const submitForm = async (params: object) => {
     try {
@@ -20,24 +15,12 @@ const UmbValForm = (props: FormComponentProps) => {
       if (!data.errcode) {
         // success
         createFormAndSubmit(data.data)
-        resetFields()
       } else {
         // err
-        const reason: null | string = data.data
-        if (reason) {
-          const fields = reason.split('-')
-          fields.forEach(f => {
-            setFields({
-              [f]: { errors: [new Error(data.errmsg)] }
-            })
-          })
-          window.scrollTo({ behavior: 'smooth', top: 0 })
-        } else {
-          notification.error({
-            description: JSON.stringify(data),
-            message: '签约失败'
-          })
-        }
+        notification.error({
+          description: JSON.stringify(data),
+          message: '签约失败'
+        })
       }
     } catch (err) {
       setSubmitting(false)

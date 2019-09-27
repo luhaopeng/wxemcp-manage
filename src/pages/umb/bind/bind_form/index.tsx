@@ -16,12 +16,7 @@ interface IFormPropsWithRouter
 const UmbBindForm = (props: IFormPropsWithRouter) => {
   const [submitting, setSubmitting] = useState(false)
   const [aType, setAType] = useState('' as AccountType)
-  const {
-    getFieldDecorator,
-    validateFieldsAndScroll,
-    resetFields,
-    setFields
-  } = props.form
+  const { getFieldDecorator, validateFieldsAndScroll } = props.form
 
   const submitForm = async (params: object) => {
     try {
@@ -37,24 +32,12 @@ const UmbBindForm = (props: IFormPropsWithRouter) => {
           duration: null,
           message: '绑卡成功'
         })
-        resetFields()
       } else {
         // err
-        const reason: null | string = data.data
-        if (reason) {
-          const fields = reason.split('-')
-          fields.forEach(f => {
-            setFields({
-              [f]: { errors: [new Error(data.errmsg)] }
-            })
-          })
-          window.scrollTo({ behavior: 'smooth', top: 0 })
-        } else {
-          notification.error({
-            description: JSON.stringify(data),
-            message: '绑卡失败'
-          })
-        }
+        notification.error({
+          description: JSON.stringify(data),
+          message: '绑卡失败'
+        })
       }
     } catch (err) {
       setSubmitting(false)
