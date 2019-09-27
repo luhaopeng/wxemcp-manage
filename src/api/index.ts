@@ -48,7 +48,8 @@ const Test = {
 
 const Umb = {
   Bind: new Request('/umb/bindEnt'),
-  Register: new Request('/umb/registerEnt')
+  Register: new Request('/umb/registerEnt'),
+  Validate: new Request('/umb/validate')
 }
 
 export { Test, Umb }
