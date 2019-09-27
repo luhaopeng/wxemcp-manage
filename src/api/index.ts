@@ -47,6 +47,7 @@ const Test = {
 }
 
 const Umb = {
+  Bind: new Request('/umb/bindEnt'),
   Register: new Request('/umb/registerEnt')
 }
 

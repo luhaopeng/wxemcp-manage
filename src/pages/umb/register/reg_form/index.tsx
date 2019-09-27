@@ -1,6 +1,7 @@
-import { Button, Divider, Form, Input, message, Select } from 'antd'
+import { Button, Divider, Form, Input, notification, Select } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../../api'
 import Enterprise from './enterprise'
 import Individual from './individual'
@@ -9,8 +10,11 @@ import Micro from './micro'
 const { Option } = Select
 
 type CustomerType = '' | '1' | '2' | '3'
+interface IFormPropsWithRouter
+  extends FormComponentProps,
+    RouteComponentProps {}
 
-const UmbRegForm = (props: FormComponentProps) => {
+const UmbRegForm = (props: IFormPropsWithRouter) => {
   const [submitting, setSubmitting] = useState(false)
   const [cType, setCType] = useState('' as CustomerType)
   const {
@@ -28,7 +32,12 @@ const UmbRegForm = (props: FormComponentProps) => {
       if (!data.errcode) {
         // success
         sessionStorage.merid = data.data.merid
-        message.success('插入成功')
+        notification.success({
+          btn: <Button onClick={hNext}>下一步</Button>,
+          description: JSON.stringify(data),
+          duration: null,
+          message: '注册成功'
+        })
         resetFields()
       } else {
         // err
@@ -42,12 +51,18 @@ const UmbRegForm = (props: FormComponentProps) => {
           })
           window.scrollTo({ behavior: 'smooth', top: 0 })
         } else {
-          message.error(data.errmsg)
+          notification.error({
+            description: JSON.stringify(data),
+            message: '注册失败'
+          })
         }
       }
     } catch (err) {
       setSubmitting(false)
-      message.error(err.message)
+      notification.warning({
+        description: err.message,
+        message: '注册异常'
+      })
     }
   }
 
@@ -62,6 +77,7 @@ const UmbRegForm = (props: FormComponentProps) => {
       }
     })
   }
+  const hNext = () => props.history.push('/umb/bind')
 
   const FormFragmentRenderer = () => {
     switch (cType) {

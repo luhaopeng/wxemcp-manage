@@ -1,6 +1,7 @@
-import { Button, Divider, Form, Input, message, Select } from 'antd'
+import { Button, Divider, Form, Input, notification, Select } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../../api'
 import FormPri from './pri_card'
 import FormPub from './pub_card'
@@ -8,8 +9,11 @@ import FormPub from './pub_card'
 const { Option } = Select
 
 type AccountType = '' | '00' | '01'
+interface IFormPropsWithRouter
+  extends FormComponentProps,
+    RouteComponentProps {}
 
-const UmbBindForm = (props: FormComponentProps) => {
+const UmbBindForm = (props: IFormPropsWithRouter) => {
   const [submitting, setSubmitting] = useState(false)
   const [aType, setAType] = useState('' as AccountType)
   const {
@@ -22,12 +26,17 @@ const UmbBindForm = (props: FormComponentProps) => {
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.Register.query(params)
+      const { data } = await Umb.Bind.query(params)
       setSubmitting(false)
       if (!data.errcode) {
         // success
-        sessionStorage.merid = data.data.merid
-        message.success('插入成功')
+        sessionStorage.token = data.data.token
+        notification.success({
+          btn: <Button onClick={hNext}>下一步</Button>,
+          description: JSON.stringify(data),
+          duration: null,
+          message: '绑卡成功'
+        })
         resetFields()
       } else {
         // err
@@ -41,12 +50,18 @@ const UmbBindForm = (props: FormComponentProps) => {
           })
           window.scrollTo({ behavior: 'smooth', top: 0 })
         } else {
-          message.error(data.errmsg)
+          notification.error({
+            description: JSON.stringify(data),
+            message: '绑卡失败'
+          })
         }
       }
     } catch (err) {
       setSubmitting(false)
-      message.error(err.message)
+      notification.warning({
+        description: err.message,
+        message: '绑卡异常'
+      })
     }
   }
 
@@ -59,6 +74,7 @@ const UmbBindForm = (props: FormComponentProps) => {
       }
     })
   }
+  const hNext = () => props.history.push('/umb/sign')
 
   const FormFragmentRenderer = () => {
     switch (aType) {
