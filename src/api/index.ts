@@ -51,7 +51,8 @@ const Umb = {
   Register: new Request('/umb/registerEnt'),
   Settle: new Request('/umb/settlePay'),
   SignParam: new Request('/umb/signParam'),
-  Validate: new Request('/umb/validate')
+  Validate: new Request('/umb/validate'),
+  Wechat: new Request('/umb/setWechat')
 }
 
 export { Test, Umb }

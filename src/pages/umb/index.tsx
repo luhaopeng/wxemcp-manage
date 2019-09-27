@@ -8,6 +8,7 @@ const CompBind = lazy(() => import('./bind'))
 const CompValidate = lazy(() => import('./validate'))
 const CompSign = lazy(() => import('./sign'))
 const CompSettle = lazy(() => import('./settle'))
+const CompWechat = lazy(() => import('./wechat'))
 
 const PageUmb: React.FunctionComponent = (): JSX.Element => (
   <Suspense fallback={<PageHolder />}>
@@ -17,6 +18,7 @@ const PageUmb: React.FunctionComponent = (): JSX.Element => (
       <Route path='/umb/validate' component={CompValidate} />
       <Route path='/umb/sign' component={CompSign} />
       <Route path='/umb/settle' component={CompSettle} />
+      <Route path='/umb/wechat' component={CompWechat} />
       <Route component={PageNotFound} />
     </Switch>
   </Suspense>
