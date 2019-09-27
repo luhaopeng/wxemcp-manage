@@ -8,15 +8,6 @@ import Micro from './micro'
 
 const { Option } = Select
 
-interface IFormData {
-  eid: string
-  name: string
-  appId: string
-  appSecret: string
-  tmplLow: string
-  tmplLowIcm: string
-  tmplRecharge: string
-}
 type CustomerType = '' | '1' | '2' | '3'
 
 const UmbRegForm = (props: FormComponentProps) => {
@@ -29,13 +20,14 @@ const UmbRegForm = (props: FormComponentProps) => {
     setFields
   } = props.form
 
-  const submitForm = async (params: IFormData) => {
+  const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
       const { data } = await Umb.Register.query(params)
       setSubmitting(false)
       if (!data.errcode) {
         // success
+        sessionStorage.merid = data.data.merid
         message.success('插入成功')
         resetFields()
       } else {
@@ -48,6 +40,7 @@ const UmbRegForm = (props: FormComponentProps) => {
               [f]: { errors: [new Error(data.errmsg)] }
             })
           })
+          window.scrollTo({ behavior: 'smooth', top: 0 })
         } else {
           message.error(data.errmsg)
         }
@@ -63,6 +56,8 @@ const UmbRegForm = (props: FormComponentProps) => {
     e.preventDefault()
     validateFieldsAndScroll((err, values) => {
       if (!err) {
+        // cache address
+        sessionStorage.address = values.address
         submitForm(values)
       }
     })
@@ -140,6 +135,7 @@ const UmbRegForm = (props: FormComponentProps) => {
       </Form.Item>
       <Form.Item label='商户地址'>
         {getFieldDecorator('address', {
+          initialValue: sessionStorage.address,
           rules: [{ message: '请填写商户地址', required: true }]
         })(<Input autoComplete='off' />)}
       </Form.Item>

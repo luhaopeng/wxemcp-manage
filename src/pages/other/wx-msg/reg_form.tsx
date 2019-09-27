@@ -41,6 +41,7 @@ const WxMsgForm = (props: FormComponentProps) => {
               [f]: { errors: [new Error(data.errmsg)] }
             })
           })
+          window.scrollTo({ behavior: 'smooth', top: 0 })
         } else {
           message.error(data.errmsg)
         }
