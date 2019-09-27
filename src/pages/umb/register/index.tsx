@@ -3,7 +3,7 @@ import React from 'react'
 import './index.less'
 import RegForm from './reg_form'
 
-const OtherWxMsg: React.FunctionComponent = (): JSX.Element => {
+const UmbRegister: React.FunctionComponent = (): JSX.Element => {
   const WrappedRegForm = Form.create({})(RegForm)
   return (
     <Layout.Content className='page-umb-reg'>
@@ -14,4 +14,4 @@ const OtherWxMsg: React.FunctionComponent = (): JSX.Element => {
   )
 }
 
-export default OtherWxMsg
+export default UmbRegister

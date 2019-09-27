@@ -1,14 +1,14 @@
 import { Card, Form, Layout } from 'antd'
 import React from 'react'
 import './index.less'
-import RegForm from './reg_form'
+import MsgForm from './msg_form'
 
 const OtherWxMsg: React.FunctionComponent = (): JSX.Element => {
-  const WrappedRegForm = Form.create({})(RegForm)
+  const WrappedMsgForm = Form.create({})(MsgForm)
   return (
     <Layout.Content className='page-wx-msg'>
-      <Card className='reg-body' title='微信推送配置录入' bordered={false}>
-        <WrappedRegForm />
+      <Card className='msg-body' title='微信推送配置录入' bordered={false}>
+        <WrappedMsgForm />
       </Card>
     </Layout.Content>
   )
