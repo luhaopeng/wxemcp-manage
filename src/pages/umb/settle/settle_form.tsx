@@ -1,31 +1,40 @@
 import { Button, Form, Input, notification } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../api'
+import { cleanObj } from '../../../utils'
 
-interface IFormPropsWithRouter
-  extends FormComponentProps,
-    RouteComponentProps {}
+export interface IFormProps extends FormComponentProps {
+  next?: () => void
+}
 
-const UmbSettleForm = (props: IFormPropsWithRouter) => {
+const UmbSettleForm = (props: IFormProps) => {
   const [submitting, setSubmitting] = useState(false)
   const { getFieldDecorator, validateFieldsAndScroll } = props.form
 
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.Settle.query(params)
+      const { data } = await Umb.Settle.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success
         // cache params
         sessionStorage.chlmerid = data.data.chlmerid
         sessionStorage.chlcode = data.data.chlcode
+        // notify
+        const key = `notify-${Date.now()}`
+        const close = () => {
+          notification.close(key)
+          if (props.next) {
+            props.next()
+          }
+        }
         notification.success({
-          btn: <Button onClick={hNext}>下一步</Button>,
+          btn: <Button onClick={close}>下一步</Button>,
           description: JSON.stringify(data),
           duration: null,
+          key,
           message: '开通成功'
         })
       } else {
@@ -52,7 +61,6 @@ const UmbSettleForm = (props: IFormPropsWithRouter) => {
       }
     })
   }
-  const hNext = () => props.history.push('/umb/wechat')
 
   return (
     <Form labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} onSubmit={hSubmit}>

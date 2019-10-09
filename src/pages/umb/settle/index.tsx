@@ -1,13 +1,15 @@
 import { Card, Form, Layout } from 'antd'
 import React from 'react'
-import SettleForm from './settle_form'
+import { RouteComponentProps } from 'react-router'
+import SettleForm, { IFormProps } from './settle_form'
 
-const UmbSettle: React.FunctionComponent = (): JSX.Element => {
-  const WrappedSettleForm = Form.create({})(SettleForm)
+const UmbSettle = (props: RouteComponentProps): JSX.Element => {
+  const WrappedSettleForm = Form.create<IFormProps>({})(SettleForm)
+  const hNext = () => props.history.push('/umb/wechat')
   return (
     <Layout.Content className='page-umb'>
       <Card className='umb-body' title='开通支付' bordered={false}>
-        <WrappedSettleForm />
+        <WrappedSettleForm next={hNext} />
       </Card>
     </Layout.Content>
   )

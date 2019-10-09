@@ -14,12 +14,12 @@ const FormEnterprise = (props: FormComponentProps) => {
   return (
     <React.Fragment>
       <Form.Item label='营业执照号'>
-        {getFieldDecorator('businesslicenseno', {
+        {getFieldDecorator('businesslicensenoE', {
           rules: [{ message: '请填写营业执照号', required: true }]
         })(<Input autoComplete='off' />)}
       </Form.Item>
       <Form.Item label='营业执照有效期'>
-        {getFieldDecorator('businesslicensevalid', {
+        {getFieldDecorator('businesslicensevalidE', {
           rules: [
             { message: '请填写有效期', required: true },
             { message: '格式为yyyyMMdd', pattern: /^\d{8}$/ }
@@ -27,7 +27,7 @@ const FormEnterprise = (props: FormComponentProps) => {
         })(<Input placeholder='长期则填写30991231' autoComplete='off' />)}
       </Form.Item>
       <Form.Item label='营业执照照片'>
-        {getFieldDecorator('businesslicensephoto', {
+        {getFieldDecorator('businesslicensephotoE', {
           getValueFromEvent: uploader,
           valuePropName: 'list'
         })(<ImgUploader uploadUrl={uploadUrl} />)}

@@ -2,6 +2,7 @@ import { Button, Form, Input, notification } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
 import { Umb } from '../../../api'
+import { cleanObj } from '../../../utils'
 
 const UmbValForm = (props: FormComponentProps) => {
   const [submitting, setSubmitting] = useState(false)
@@ -10,7 +11,7 @@ const UmbValForm = (props: FormComponentProps) => {
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.SignParam.query(params)
+      const { data } = await Umb.SignParam.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success

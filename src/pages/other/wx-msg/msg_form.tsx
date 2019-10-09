@@ -2,6 +2,7 @@ import { Button, Form, Input, message } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
 import { Test } from '../../../api'
+import { cleanObj } from '../../../utils'
 
 interface IFormData {
   eid: string
@@ -25,7 +26,7 @@ const WxMsgForm = (props: FormComponentProps) => {
   const submitForm = async (params: IFormData) => {
     try {
       setSubmitting(true)
-      const { data } = await Test.WxMsg.query(params)
+      const { data } = await Test.WxMsg.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success

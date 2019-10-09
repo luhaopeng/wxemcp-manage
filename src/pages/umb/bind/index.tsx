@@ -1,13 +1,15 @@
 import { Card, Form, Layout } from 'antd'
 import React from 'react'
-import BindForm from './bind_form'
+import { RouteComponentProps } from 'react-router'
+import BindForm, { IFormProps } from './bind_form'
 
-const UmbBind: React.FunctionComponent = (): JSX.Element => {
-  const WrappedBindForm = Form.create({})(BindForm)
+const UmbBind = (props: RouteComponentProps): JSX.Element => {
+  const WrappedBindForm = Form.create<IFormProps>({})(BindForm)
+  const hNext = () => props.history.push('/umb/sign')
   return (
     <Layout.Content className='page-umb'>
       <Card className='umb-body' title='商户绑卡' bordered={false}>
-        <WrappedBindForm />
+        <WrappedBindForm next={hNext} />
       </Card>
     </Layout.Content>
   )

@@ -41,14 +41,14 @@ const FormMicro = (props: FormComponentProps) => {
         })(<ImgUploader uploadUrl={uploadUrl} />)}
       </Form.Item>
       <Form.Item label='店铺门牌照片'>
-        {getFieldDecorator('storephoto', {
+        {getFieldDecorator('storephotoM', {
           getValueFromEvent: uploader,
           rules: [{ message: '请选择图片', required: true }],
           valuePropName: 'list'
         })(<ImgUploader uploadUrl={uploadUrl} />)}
       </Form.Item>
       <Form.Item label='店铺内照片'>
-        {getFieldDecorator('storeinsidephoto', {
+        {getFieldDecorator('storeinsidephotoM', {
           getValueFromEvent: uploader,
           rules: [{ message: '请选择图片', required: true }],
           valuePropName: 'list'

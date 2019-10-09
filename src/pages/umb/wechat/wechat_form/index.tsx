@@ -1,19 +1,16 @@
 import { Button, Divider, Form, Input, notification, Select } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../../api'
+import { cleanObj } from '../../../../utils'
 import FormAppid from './appid'
 import FormPath from './path'
 
 const { Option } = Select
 
 type ConfigType = '' | 'appid' | 'path'
-interface IFormPropsWithRouter
-  extends FormComponentProps,
-    RouteComponentProps {}
 
-const UmbWechatForm = (props: IFormPropsWithRouter) => {
+const UmbWechatForm = (props: FormComponentProps) => {
   const [submitting, setSubmitting] = useState(false)
   const [cType, setCType] = useState('' as ConfigType)
   const { getFieldDecorator, validateFieldsAndScroll } = props.form
@@ -21,7 +18,7 @@ const UmbWechatForm = (props: IFormPropsWithRouter) => {
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.Wechat.query(params)
+      const { data } = await Umb.Wechat.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success
@@ -78,7 +75,7 @@ const UmbWechatForm = (props: IFormPropsWithRouter) => {
       </Form.Item>
       <Form.Item label='通道编码'>
         {getFieldDecorator('chlcode', {
-          initialValue: '',
+          initialValue: sessionStorage.chlcode || '',
           rules: [{ message: '请选择编码', required: true }]
         })(
           <Select>

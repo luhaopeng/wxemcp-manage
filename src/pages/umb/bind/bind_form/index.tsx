@@ -1,19 +1,19 @@
 import { Button, Divider, Form, Input, notification, Select } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../../api'
+import { cleanObj } from '../../../../utils'
 import FormPri from './pri_card'
 import FormPub from './pub_card'
 
 const { Option } = Select
 
 type AccountType = '' | '00' | '01'
-interface IFormPropsWithRouter
-  extends FormComponentProps,
-    RouteComponentProps {}
+export interface IFormProps extends FormComponentProps {
+  next?: () => void
+}
 
-const UmbBindForm = (props: IFormPropsWithRouter) => {
+const UmbBindForm = (props: IFormProps) => {
   const [submitting, setSubmitting] = useState(false)
   const [aType, setAType] = useState('' as AccountType)
   const { getFieldDecorator, validateFieldsAndScroll } = props.form
@@ -21,15 +21,24 @@ const UmbBindForm = (props: IFormPropsWithRouter) => {
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.Bind.query(params)
+      const { data } = await Umb.Bind.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success
         sessionStorage.token = data.data.token
+        // notify
+        const key = `notify-${Date.now()}`
+        const close = () => {
+          notification.close(key)
+          if (props.next) {
+            props.next()
+          }
+        }
         notification.success({
-          btn: <Button onClick={hNext}>下一步</Button>,
+          btn: <Button onClick={close}>下一步</Button>,
           description: JSON.stringify(data),
           duration: null,
+          key,
           message: '绑卡成功'
         })
       } else {
@@ -57,7 +66,6 @@ const UmbBindForm = (props: IFormPropsWithRouter) => {
       }
     })
   }
-  const hNext = () => props.history.push('/umb/sign')
 
   const FormFragmentRenderer = () => {
     switch (aType) {

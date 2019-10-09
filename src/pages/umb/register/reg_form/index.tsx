@@ -1,8 +1,8 @@
 import { Button, Divider, Form, Input, notification, Select } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { Umb } from '../../../../api'
+import { cleanObj } from '../../../../utils'
 import Enterprise from './enterprise'
 import Individual from './individual'
 import Micro from './micro'
@@ -10,11 +10,11 @@ import Micro from './micro'
 const { Option } = Select
 
 type CustomerType = '' | '1' | '2' | '3'
-interface IFormPropsWithRouter
-  extends FormComponentProps,
-    RouteComponentProps {}
+export interface IFormProps extends FormComponentProps {
+  next?: () => void
+}
 
-const UmbRegForm = (props: IFormPropsWithRouter) => {
+const UmbRegForm = (props: IFormProps) => {
   const [submitting, setSubmitting] = useState(false)
   const [cType, setCType] = useState('' as CustomerType)
   const { getFieldDecorator, validateFieldsAndScroll, setFields } = props.form
@@ -22,15 +22,24 @@ const UmbRegForm = (props: IFormPropsWithRouter) => {
   const submitForm = async (params: object) => {
     try {
       setSubmitting(true)
-      const { data } = await Umb.Register.query(params)
+      const { data } = await Umb.Register.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
         // success
         sessionStorage.merid = data.data.merid
+        // notify
+        const key = `notify-${Date.now()}`
+        const close = () => {
+          notification.close(key)
+          if (props.next) {
+            props.next()
+          }
+        }
         notification.success({
-          btn: <Button onClick={hNext}>下一步</Button>,
+          btn: <Button onClick={close}>下一步</Button>,
           description: JSON.stringify(data),
           duration: null,
+          key,
           message: '注册成功'
         })
       } else {
@@ -71,7 +80,6 @@ const UmbRegForm = (props: IFormPropsWithRouter) => {
       }
     })
   }
-  const hNext = () => props.history.push('/umb/bind')
 
   const FormFragmentRenderer = () => {
     switch (cType) {

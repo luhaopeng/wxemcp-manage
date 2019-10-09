@@ -14,12 +14,12 @@ const FormIndividual = (props: FormComponentProps) => {
   return (
     <React.Fragment>
       <Form.Item label='营业执照号'>
-        {getFieldDecorator('businesslicenseno', {
+        {getFieldDecorator('businesslicensenoP', {
           rules: [{ message: '请填写营业执照号', required: true }]
         })(<Input autoComplete='off' />)}
       </Form.Item>
       <Form.Item label='营业执照有效期'>
-        {getFieldDecorator('businesslicensevalid', {
+        {getFieldDecorator('businesslicensevalidP', {
           rules: [
             { message: '请填写有效期', required: true },
             { message: '格式为yyyyMMdd', pattern: /^\d{8}$/ }
@@ -27,7 +27,7 @@ const FormIndividual = (props: FormComponentProps) => {
         })(<Input placeholder='长期则填写30991231' autoComplete='off' />)}
       </Form.Item>
       <Form.Item label='营业执照照片'>
-        {getFieldDecorator('businesslicensephoto', {
+        {getFieldDecorator('businesslicensephotoP', {
           getValueFromEvent: uploader,
           valuePropName: 'list'
         })(<ImgUploader uploadUrl={uploadUrl} />)}
@@ -74,7 +74,7 @@ const FormIndividual = (props: FormComponentProps) => {
         )}
       </Form.Item>
       <Form.Item label='店铺门牌照片'>
-        {getFieldDecorator('storephoto', {
+        {getFieldDecorator('storephotoP', {
           getValueFromEvent: uploader,
           rules: [{ message: '请选择图片', required: true }],
           valuePropName: 'list'
@@ -88,7 +88,7 @@ const FormIndividual = (props: FormComponentProps) => {
         })(<ImgUploader uploadUrl={uploadUrl} />)}
       </Form.Item>
       <Form.Item label='店铺内照片'>
-        {getFieldDecorator('storeinsidephoto', {
+        {getFieldDecorator('storeinsidephotoP', {
           getValueFromEvent: uploader,
           rules: [{ message: '请选择图片', required: true }],
           valuePropName: 'list'

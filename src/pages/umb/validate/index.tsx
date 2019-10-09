@@ -1,13 +1,16 @@
 import { Card, Form, Layout } from 'antd'
 import React from 'react'
-import ValForm from './val_form'
+import { RouteComponentProps } from 'react-router'
+import ValForm, { IFormProps } from './val_form'
 
-const UmbValidate: React.FunctionComponent = (): JSX.Element => {
-  const WrappedValForm = Form.create({})(ValForm)
+const UmbValidate = (props: RouteComponentProps): JSX.Element => {
+  const WrappedValForm = Form.create<IFormProps>({})(ValForm)
+  const hNext = () => props.history.push('/umb/sign')
+
   return (
     <Layout.Content className='page-umb'>
       <Card className='umb-body' title='绑卡认证' bordered={false}>
-        <WrappedValForm />
+        <WrappedValForm next={hNext} />
       </Card>
     </Layout.Content>
   )
