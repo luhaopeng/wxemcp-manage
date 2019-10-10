@@ -16,7 +16,6 @@ const PageHome: React.FunctionComponent = (): JSX.Element => {
             <li>修复提交表单时，可空字段为undefined的错误</li>
             <li>暂时使用区分字段（P/E/M）</li>
             <li>修复“下一步”点击错误</li>
-            <li>修复“微信配置”配置信息错乱的问题</li>
             <li>修复“微信配置”通道编码未自动填充的问题</li>
           </ol>
         </Paragraph>
