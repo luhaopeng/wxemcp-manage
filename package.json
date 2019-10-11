@@ -1,6 +1,6 @@
 {
   "name": "wxemcp-manage",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "build": "webpack --config webpack/prod.config.js",
     "dev": "webpack-dev-server --config webpack/dev.config.js"

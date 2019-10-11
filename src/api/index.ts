@@ -42,6 +42,7 @@ class Request {
 const Test = {
   Decrypt: new Request('/test/decrypt'),
   Encrypt: new Request('/test/encrypt'),
+  Notice: new Request('/test/resendWxMsg'),
   PayReg: new Request('/test/registerEnt'),
   WxMsg: new Request('/test/msgConfig')
 }

@@ -9,6 +9,14 @@ const PageHome: React.FunctionComponent = (): JSX.Element => {
     <Layout.Content className='page-home'>
       <div className='welcome'>
         <Title level={2}>e能家园管理工具</Title>
+        <Title level={4}>0.1.2</Title>
+        <Paragraph>
+          <Text type='secondary'>2019-10-11</Text>
+          <br />
+          <ol>
+            <li>新增“发送低费通知”页面</li>
+          </ol>
+        </Paragraph>
         <Title level={4}>0.1.1</Title>
         <Paragraph>
           <Text type='secondary'>2019-10-09</Text>

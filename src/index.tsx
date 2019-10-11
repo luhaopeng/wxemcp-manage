@@ -39,6 +39,7 @@ class App extends React.Component<{}, IAppState> {
       {
         children: [
           { key: 'other-crypto', link: '/other/crypto', text: '加解密测试' },
+          { key: 'other-low-notice', link: '/other/low-notice', text: '发送低费通知' },
           {
             key: 'other-pay-reg',
             link: '/other/pay-reg',
