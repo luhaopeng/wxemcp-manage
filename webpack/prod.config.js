@@ -7,7 +7,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 module.exports = merge(base, {
   mode: 'production',
   output: {
-    publicPath: './'
+    publicPath: './',
+    filename: '[name]_[contenthash].js'
   },
   module: {
     rules: [
@@ -31,5 +32,10 @@ module.exports = merge(base, {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()]
+  plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 })

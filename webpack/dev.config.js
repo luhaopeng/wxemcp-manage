@@ -6,7 +6,8 @@ const path = require('path')
 module.exports = merge(base, {
   mode: 'development',
   output: {
-    publicPath: '/'
+    publicPath: '/',
+    filename: '[name]_[hash].js'
   },
   devServer: {
     contentBase: path.join(__dirname, '../static'),

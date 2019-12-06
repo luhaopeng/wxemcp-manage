@@ -8,8 +8,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name]_[hash].js'
+    path: path.resolve(__dirname, '../dist')
   },
   module: {
     rules: [
