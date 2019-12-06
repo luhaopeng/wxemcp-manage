@@ -30,7 +30,8 @@ class App extends React.Component<{}, IAppState> {
           },
           { key: 'umb-sign', link: '/umb/sign', text: '商户签约 CMS014' },
           { key: 'umb-settle', link: '/umb/settle', text: '开通支付 CMS011' },
-          { key: 'umb-wechat', link: '/umb/wechat', text: '微信配置 CMS015' }
+          { key: 'umb-wechat', link: '/umb/wechat', text: '微信配置 CMS015' },
+          { key: 'umb-modify', link: '/umb/modify', text: '修改信息 CMS018' }
         ],
         icon: 'bank',
         key: 'umb',

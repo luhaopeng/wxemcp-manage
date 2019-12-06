@@ -49,6 +49,7 @@ const Test = {
 
 const Umb = {
   Bind: new Request('/umb/bindEnt'),
+  Modify: new Request('/umb/modInfo'),
   Register: new Request('/umb/registerEnt'),
   Settle: new Request('/umb/settlePay'),
   SignParam: new Request('/umb/signParam'),
