@@ -21,7 +21,6 @@ const LowNoticeForm = (props: FormComponentProps) => {
       const { data } = await Test.Notice.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         notification.success({
           description: JSON.stringify(data.data),
           duration: null,
@@ -29,7 +28,6 @@ const LowNoticeForm = (props: FormComponentProps) => {
         })
         resetFields()
       } else {
-        // err
         const reason: null | string = data.data
         if (reason) {
           const fields = reason.split('-')

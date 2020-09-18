@@ -25,9 +25,7 @@ const UmbRegForm = (props: IFormProps) => {
       const { data } = await Umb.Register.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         sessionStorage.merid = data.data.merid
-        // notify
         const key = `notify-${Date.now()}`
         const close = () => {
           notification.close(key)
@@ -43,7 +41,6 @@ const UmbRegForm = (props: IFormProps) => {
           message: '注册成功'
         })
       } else {
-        // err
         const reason: null | string = data.data
         if (reason) {
           const fields = reason.split('-')
@@ -74,7 +71,6 @@ const UmbRegForm = (props: IFormProps) => {
     e.preventDefault()
     validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // cache address
         sessionStorage.address = values.address
         submitForm(values)
       }

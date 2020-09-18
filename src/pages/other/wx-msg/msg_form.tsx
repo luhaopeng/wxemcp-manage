@@ -12,6 +12,7 @@ interface IFormData {
   tmplLow: string
   tmplLowIcm: string
   tmplRecharge: string
+  tmplLowUrl: string
 }
 
 const WxMsgForm = (props: FormComponentProps) => {
@@ -29,11 +30,9 @@ const WxMsgForm = (props: FormComponentProps) => {
       const { data } = await Test.WxMsg.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         message.success('插入成功')
         resetFields()
       } else {
-        // err
         const reason: null | string = data.data
         if (reason) {
           const fields = reason.split('-')
@@ -100,6 +99,11 @@ const WxMsgForm = (props: FormComponentProps) => {
       <Form.Item label='模板id - 购电通知(卡表)'>
         {getFieldDecorator('tmplRecharge', {})(
           <Input placeholder='充值通知' autoComplete='off' />
+        )}
+      </Form.Item>
+      <Form.Item label='低费通知底部URL'>
+        {getFieldDecorator('tmplLowUrl', {})(
+          <Input placeholder='低费通知底部URL' autoComplete='off' />
         )}
       </Form.Item>
       <Form.Item wrapperCol={{ span: 14, offset: 6 }}>

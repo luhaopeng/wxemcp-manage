@@ -21,14 +21,12 @@ const UmbWechatForm = (props: FormComponentProps) => {
       const { data } = await Umb.Wechat.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         notification.success({
           description: JSON.stringify(data),
           duration: null,
           message: '配置成功'
         })
       } else {
-        // err
         notification.error({
           description: JSON.stringify(data),
           message: '配置失败'

@@ -32,11 +32,9 @@ const PayRegForm = (props: FormComponentProps) => {
       const { data } = await Test.PayReg.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         message.success('插入成功')
         resetFields()
       } else {
-        // err
         const reason: null | string = data.data
         if (reason) {
           const fields = reason.split('-')

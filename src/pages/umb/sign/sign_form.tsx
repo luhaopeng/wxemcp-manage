@@ -14,10 +14,8 @@ const UmbValForm = (props: FormComponentProps) => {
       const { data } = await Umb.SignParam.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         createFormAndSubmit(data.data)
       } else {
-        // err
         notification.error({
           description: JSON.stringify(data),
           message: '签约失败'

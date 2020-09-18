@@ -24,9 +24,7 @@ const UmbBindForm = (props: IFormProps) => {
       const { data } = await Umb.Bind.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
         sessionStorage.token = data.data.token
-        // notify
         const key = `notify-${Date.now()}`
         const close = () => {
           notification.close(key)
@@ -42,7 +40,6 @@ const UmbBindForm = (props: IFormProps) => {
           message: '绑卡成功'
         })
       } else {
-        // err
         notification.error({
           description: JSON.stringify(data),
           message: '绑卡失败'

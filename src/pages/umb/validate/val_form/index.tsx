@@ -24,8 +24,6 @@ const UmbValForm = (props: IFormProps) => {
       const { data } = await Umb.Validate.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
-        // notify
         const key = `notify-${Date.now()}`
         const close = () => {
           notification.close(key)
@@ -41,7 +39,6 @@ const UmbValForm = (props: IFormProps) => {
           message: '认证成功'
         })
       } else {
-        // err
         notification.error({
           description: JSON.stringify(data),
           message: '认证失败'

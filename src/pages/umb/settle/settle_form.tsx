@@ -18,11 +18,8 @@ const UmbSettleForm = (props: IFormProps) => {
       const { data } = await Umb.Settle.query(cleanObj(params))
       setSubmitting(false)
       if (!data.errcode) {
-        // success
-        // cache params
         sessionStorage.chlmerid = data.data.chlmerid
         sessionStorage.chlcode = data.data.chlcode
-        // notify
         const key = `notify-${Date.now()}`
         const close = () => {
           notification.close(key)
@@ -38,7 +35,6 @@ const UmbSettleForm = (props: IFormProps) => {
           message: '开通成功'
         })
       } else {
-        // err
         notification.error({
           description: JSON.stringify(data),
           message: '开通失败'
